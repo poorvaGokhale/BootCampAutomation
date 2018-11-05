@@ -1,4 +1,4 @@
-package com.ViuWeb;
+package ViuWeb;
 
 import org.junit.Before;
 import org.junit.Test;
