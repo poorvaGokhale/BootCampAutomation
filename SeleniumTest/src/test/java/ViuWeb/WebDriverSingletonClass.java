@@ -14,20 +14,13 @@ public class WebDriverSingletonClass {
 
     }
 
-    public WebDriver getDriverInstance() {
-        // WebDriver initialise for all Package -project to be accessible for all other  classes
 
+
+    public static WebDriver getWebDriverSingletonClassInstance() {
         if (driver == null) {
+    //        WebDriverSingletonClass driverSingleton = new WebDriverSingletonClass();
             driver = new ChromeDriver();
-            System.setProperty("webdriver.chrome.driver", "/Users/poorvagokhale/Downloads/chromedriver");
         }
-
         return driver;
-    }
-
-
-    public static WebDriverSingletonClass getWebDriverSingletonClassInstance() {
-        if (drievrSingleton == null) drievrSingleton = new WebDriverSingletonClass();
-        return drievrSingleton;
     }
 }

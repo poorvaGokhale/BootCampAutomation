@@ -12,6 +12,5 @@ public class SearchPage extends ViuPage {
         WebDriverWait videoWait = new WebDriverWait(driver, 20);
         WebElement firstSearchResult = videoWait.until(ExpectedConditions.presenceOfElementLocated(By.className("c-thumlist-card__media")));
         firstSearchResult.click();
-
     }
 }

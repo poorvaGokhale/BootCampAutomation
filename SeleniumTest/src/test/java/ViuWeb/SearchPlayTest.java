@@ -4,30 +4,30 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
-import static org.junit.Assert.assertTrue;
-
 public class SearchPlayTest {
-    /*
-     HomePage homepPage1 = launchPage("Viu.com");
-     SearchResultPage searchResult1 = homePage1.searchOnHomePage("Banned");
-     VideoPage videoPage1 =  searchResult1(1).Play(click)
-     videoPage1.details == annotation
-  */
+
     public WebDriver driver;
-    private WebDriverSingletonClass drievrSingleton;
+    //   private WebDriverSingletonClass driverSingleton;
     public ViuPage homePage1;
     // public ViuPage searchPage1;
 
     @Before
     public void DriverInitialise() {
-        drievrSingleton = WebDriverSingletonClass.getWebDriverSingletonClassInstance();
-        driver = drievrSingleton.getDriverInstance();
+        //   driverSingleton = WebDriverSingletonClass.getWebDriverSingletonClassInstance();
+        //  driver = driverSingleton.getDriverInstance();
+        driver = WebDriverSingletonClass.getWebDriverSingletonClassInstance();
     }
 
     @Test
     public void launchHomePage() {
+
+/*
+        HomePage homepPage1 = launchPage("Viu.com");
+        SearchResultPage searchResult1 = homePage1.searchOnHomePage("Banned");
+        VideoPage videoPage1 = searchResult1(1).Play(click)
+        videoPage1.details == annotation
+*/
         homePage1 = new HomePage();
-        //    homePage1.driver.get("https://www.viu.com/ott/in/en/hindi/");
         homePage1.setViuURL("https://www.viu.com/ott/in/en/hindi/");
         driver.get(homePage1.viuURL);
 
@@ -39,10 +39,19 @@ public class SearchPlayTest {
 
         //call SearchPage child method for Play
         searchPage1.playFirstSearchedResult(driver);
+
+
     }
 
-    public void searchPlay() {
-        assertTrue(true);
+    @Test
+    public void menuSearchPlay() {
+        homePage1 = new HomePage();
+        homePage1.setViuURL("https://www.viu.com/ott/in/en/hindi/");
+        driver.get(homePage1.viuURL);
+        //  assertTrue(true);
+        ((HomePage) homePage1).setMenuOption("Korean");
+        SearchPage searchPage1 = ((HomePage) homePage1).clickMenu(driver);
+
     }
 
 
