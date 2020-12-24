@@ -3,39 +3,45 @@ package SeleniumTest.MailSignIn;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class SignIn {
     WebDriver driver = new ChromeDriver();
     String webUlr ="https://login.yahoo.com/";
-    String invalidUserName = "Test";
+    String invalidUserName = "Poorva";
+    String invalidPasswd = "invalid@123";
     String validUserName = "aamod_00";
     String validPasswd = "";
+    WebDriverWait wait = new WebDriverWait(driver,20);
+/*    ChromeOptions options = new ChromeOptions();
+    options.addArgument("--allow-running-insecure-content");
+    options.addArgument("--disable-web-security");
+*/
 
     @Test
     public void InvalidUser() {
         driver.get(webUlr);
 //testcase 1 Ivalid username
-        WebElement userNameInputtxtBox = driver.findElement(By.id("login-username"));
-        userNameInputtxtBox.sendKeys(invalidUserName);
-        WebElement signInButton = driver.findElement(By.id("login-signin"));
-        signInButton.submit();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("login-username"))).sendKeys(invalidUserName);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("login-signin"))).click();
+        assertThat(wait.until(ExpectedConditions.presenceOfElementLocated(By.id("username-error"))).isDisplayed()).isTrue();
+     //   assertThat(wait.until(ExpectedConditions.presenceOfElementLocated(By.className("error-msg"))).isDisplayed()).isTrue();
         driver.close();
     }
     @Test
     public void InvalidPasswd(){
         //Valid Username  Invalid Passwd
         driver.get(webUlr);
-        WebElement userNameInputtxtBox = driver.findElement(By.id("login-username"));
-        userNameInputtxtBox.sendKeys(validUserName);
-        WebElement signInButton = driver.findElement(By.id("login-signin"));
-        signInButton.submit();
-        WebElement passwdInputBox =driver.findElement(By.id("login-passwd"));
-        passwdInputBox.sendKeys(invalidUserName);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("login-username"))).sendKeys(validUserName);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("login-signin"))).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("login-passwd"))).sendKeys(invalidPasswd);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("login-signin"))).click();
+        assertThat(wait.until(ExpectedConditions.presenceOfElementLocated(By.className("error-msg"))).isDisplayed()).isTrue();
 
-        signInButton = driver.findElement(By.id("login-signin"));
-        signInButton.submit();
 
         driver.close();
 
@@ -44,16 +50,10 @@ public class SignIn {
     public void ValidPasswd(){
         //Valid Username  Invalid Passwd
         driver.get(webUlr);
-        WebElement userNameInputtxtBox = driver.findElement(By.id("login-username"));
-        userNameInputtxtBox.sendKeys(validUserName);
-        WebElement signInButton = driver.findElement(By.id("login-signin"));
-        signInButton.submit();
-        WebElement passwdInputBox =driver.findElement(By.id("login-passwd"));
-        passwdInputBox.sendKeys(validPasswd);
-
-        signInButton = driver.findElement(By.id("login-signin"));
-        signInButton.submit();
-
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("login-username"))).sendKeys(validUserName);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("login-signin"))).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("login-passwd"))).sendKeys(validPasswd);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("login-signin"))).click();
         driver.close();
 
     }
