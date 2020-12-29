@@ -14,8 +14,8 @@ public class SignIn {
     String webUlr ="https://login.yahoo.com/";
     String invalidUserName = "Poorva";
     String invalidPasswd = "invalid@123";
-    String validUserName = "aamod_00";
-    String validPasswd = "";
+    String validUserName = "validUser";
+    String validPasswd = "password@123";
     WebDriverWait wait = new WebDriverWait(driver,20);
 /*    ChromeOptions options = new ChromeOptions();
     options.addArgument("--allow-running-insecure-content");
@@ -28,8 +28,8 @@ public class SignIn {
 //testcase 1 Ivalid username
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("login-username"))).sendKeys(invalidUserName);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("login-signin"))).click();
-        assertThat(wait.until(ExpectedConditions.presenceOfElementLocated(By.id("username-error"))).isDisplayed()).isTrue();
-     //   assertThat(wait.until(ExpectedConditions.presenceOfElementLocated(By.className("error-msg"))).isDisplayed()).isTrue();
+     //   assertThat(wait.until(ExpectedConditions.presenceOfElementLocated(By.id("username-error"))).isDisplayed()).isTrue();
+        assertThat(wait.until(ExpectedConditions.presenceOfElementLocated(By.className("error-msg"))).isDisplayed()).isTrue();
         driver.close();
     }
     @Test
@@ -54,6 +54,8 @@ public class SignIn {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("login-signin"))).click();
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("login-passwd"))).sendKeys(validPasswd);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("login-signin"))).click();
+        assertThat(wait.until(ExpectedConditions.presenceOfElementLocated(By.id("header-profile-button"))).isDisplayed()).isTrue();
+
         driver.close();
 
     }
